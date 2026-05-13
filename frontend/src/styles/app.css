@@ -52,8 +52,8 @@
   --surface:   #180f22;
   --card:      #1e1228;
   --border:    #3a2050;
-  --accent:    #c084fc;
-  --accent2:   #f0abfc;
+  --accent:    #f472b6;
+  --accent2:   #fb7185;
   --cyan:      #a5f3fc;
   --text:      #f0e8ff;
   --muted:     #7a5a9a;
@@ -61,10 +61,10 @@
   --success:   #86efac;
   --number:    #fde68a;
   --string:    #a5f3fc;
-  --keyword:   #f0abfc;
+  --keyword:   #f472b6;
   --comment:   #6a4a8a;
-  --glow:      0 0 12px rgba(192,132,252,0.35);
-  --glow2:     0 0 12px rgba(240,171,252,0.3);
+  --glow:      0 0 12px rgba(244,114,182,0.35);
+  --glow2:     0 0 12px rgba(251,113,133,0.3);
   --bg-grad:
     radial-gradient(ellipse at 25% 25%, rgba(192,132,252,0.08) 0%, transparent 60%),
     radial-gradient(ellipse at 75% 75%, rgba(240,171,252,0.06) 0%, transparent 60%);

@@ -12,7 +12,6 @@ export default function Analyzer() {
   const [error,   setError]   = useState(null)
   const [theme,   setTheme]   = useState('night')
 
-  // Apply theme to document root
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
@@ -52,6 +51,7 @@ export default function Analyzer() {
         tokens={result?.tokens ?? []}
         errors={result?.errors ?? []}
         loading={loading}
+        theme={theme}
       />
       <div className="bottom-bar">
         <span className="hint">

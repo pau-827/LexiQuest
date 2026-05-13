@@ -1,5 +1,12 @@
-export default function TokenTable({ tokens, errors, loading }) {
+const THEME_ICON = {
+  night:   '🌙',
+  cafe:    '☕',
+  bedroom: '🎧',
+}
+
+export default function TokenTable({ tokens, errors, loading, theme }) {
   const all = [...(tokens ?? []), ...(errors ?? [])]
+  const icon = THEME_ICON[theme] ?? '🌙'
 
   if (loading) {
     return (
@@ -17,7 +24,7 @@ export default function TokenTable({ tokens, errors, loading }) {
     return (
       <div className="token-wrap">
         <div className="empty-state">
-          <div className="icon">🌙</div>
+          <div className="icon">{icon}</div>
           paste some python code<br />and hit analyze
         </div>
       </div>

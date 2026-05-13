@@ -23,7 +23,7 @@ if x > 0 and x != 5:
       />
       <div className="editor-actions">
         <button className="btn-analyze" onClick={onAnalyze} disabled={loading}>
-          {loading ? 'analyzing...' : 'analyze  ⌃↵'}
+          {loading ? 'analyzing...' : 'analyze >_<'}
         </button>
         <button className="btn-clear" onClick={onClear}>clear</button>
       </div>

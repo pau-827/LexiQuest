@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar     from '../components/Navbar'
 import Editor     from '../components/Editor'
 import StatsCard  from '../components/StatsCard'
@@ -10,6 +10,12 @@ export default function Analyzer() {
   const [result,  setResult]  = useState(null)
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState(null)
+  const [theme,   setTheme]   = useState('night')
+
+  // Apply theme to document root
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
 
   const handleAnalyze = async () => {
     if (!code.trim()) return
@@ -33,7 +39,7 @@ export default function Analyzer() {
 
   return (
     <div className="device">
-      <Navbar />
+      <Navbar theme={theme} setTheme={setTheme} />
       <Editor
         value={code}
         onChange={setCode}
@@ -51,7 +57,8 @@ export default function Analyzer() {
         <span className="hint">
           {error ? `⚠ ${error}` : 'ctrl+enter to analyze'}
         </span>
-        <div className="status-dot" style={{ background: error ? 'var(--error)' : 'var(--success)' }} />
+        <div className="status-dot"
+          style={{ background: error ? 'var(--error)' : 'var(--success)' }} />
       </div>
     </div>
   )

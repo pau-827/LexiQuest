@@ -8,32 +8,72 @@ void write_token(const char *type, const char *value);
 
 %%
 
-"say"                           { write_token("PRINT",    yytext); }
-"add"                           { write_token("ADD",      yytext); }
-"mul"                           { write_token("MULTIPLY", yytext); }
-"weather"                       { write_token("WEATHER",  yytext); }
-"play"                          { write_token("MUSIC",    yytext); }
+"if"        { write_token("KEYWORD",     yytext); }
+"else"      { write_token("KEYWORD",     yytext); }
+"elif"      { write_token("KEYWORD",     yytext); }
+"while"     { write_token("KEYWORD",     yytext); }
+"for"       { write_token("KEYWORD",     yytext); }
+"def"       { write_token("KEYWORD",     yytext); }
+"return"    { write_token("KEYWORD",     yytext); }
+"import"    { write_token("KEYWORD",     yytext); }
+"print"     { write_token("KEYWORD",     yytext); }
+"True"      { write_token("BOOLEAN",     yytext); }
+"False"     { write_token("BOOLEAN",     yytext); }
+"None"      { write_token("KEYWORD",     yytext); }
+"and"       { write_token("KEYWORD",     yytext); }
+"or"        { write_token("KEYWORD",     yytext); }
+"not"       { write_token("KEYWORD",     yytext); }
+"in"        { write_token("KEYWORD",     yytext); }
+"is"        { write_token("KEYWORD",     yytext); }
 
-[0-9]+                          { write_token("NUMBER",   yytext); }
-\"[^\"]*\"                      { write_token("STRING",   yytext); }
+"=="        { write_token("OPERATOR",    yytext); }
+"!="        { write_token("OPERATOR",    yytext); }
+"<="        { write_token("OPERATOR",    yytext); }
+">="        { write_token("OPERATOR",    yytext); }
+"<"         { write_token("OPERATOR",    yytext); }
+">"         { write_token("OPERATOR",    yytext); }
+"="         { write_token("OPERATOR",    yytext); }
+"+"         { write_token("OPERATOR",    yytext); }
+"-"         { write_token("OPERATOR",    yytext); }
+"*"         { write_token("OPERATOR",    yytext); }
+"/"         { write_token("OPERATOR",    yytext); }
+"%"         { write_token("OPERATOR",    yytext); }
+"+="        { write_token("OPERATOR",    yytext); }
+"-="        { write_token("OPERATOR",    yytext); }
 
-[ \t\r\n]+                      { /* skip whitespace */ }
+":"         { write_token("PUNCTUATION", yytext); }
+","         { write_token("PUNCTUATION", yytext); }
+"."         { write_token("PUNCTUATION", yytext); }
+"("         { write_token("PUNCTUATION", yytext); }
+")"         { write_token("PUNCTUATION", yytext); }
+"["         { write_token("PUNCTUATION", yytext); }
+"]"         { write_token("PUNCTUATION", yytext); }
 
-[a-zA-Z][a-zA-Z0-9_]*          { write_token("UNKNOWN_CMD", yytext); }
+[0-9]+\.[0-9]+              { write_token("FLOAT",       yytext); }
+[0-9]+                      { write_token("INTEGER",     yytext); }
 
-.                               {
-                                    char msg[64];
-                                    snprintf(msg, sizeof(msg), "Unknown token: %s", yytext);
-                                    write_token("ERROR", msg);
-                                }
+\"[^\"]*\"                  { write_token("STRING",      yytext); }
+'[^']*'                     { write_token("STRING",      yytext); }
+
+#[^\n]*                     { write_token("COMMENT",     yytext); }
+
+[a-zA-Z_][a-zA-Z0-9_]*     { write_token("IDENTIFIER",  yytext); }
+
+[ \t\r\n]+                  { /* skip whitespace */ }
+
+.                           {
+                                char msg[64];
+                                snprintf(msg, sizeof(msg), "Unknown token: %s", yytext);
+                                write_token("ERROR", msg);
+                            }
 
 %%
 
 int yywrap() { return 1; }
 
 void write_token(const char *type, const char *value) {
-    printf("%-20s %-30s\n", type, value);
-    fprintf(outfile, "%-20s %-30s\n", type, value);
+    printf("%-15s %-30s\n", type, value);
+    fprintf(outfile, "%-15s %-30s\n", type, value);
 }
 
 int main() {
@@ -43,10 +83,10 @@ int main() {
         return 1;
     }
 
-    printf("%-20s %-30s\n", "TOKEN_TYPE", "VALUE");
-    printf("%-20s %-30s\n", "--------------------", "------------------------------");
-    fprintf(outfile, "%-20s %-30s\n", "TOKEN_TYPE", "VALUE");
-    fprintf(outfile, "%-20s %-30s\n", "--------------------", "------------------------------");
+    printf("%-15s %-30s\n", "TOKEN_TYPE", "VALUE");
+    printf("%-15s %-30s\n", "---------------", "------------------------------");
+    fprintf(outfile, "%-15s %-30s\n", "TOKEN_TYPE", "VALUE");
+    fprintf(outfile, "%-15s %-30s\n", "---------------", "------------------------------");
 
     yylex();
 

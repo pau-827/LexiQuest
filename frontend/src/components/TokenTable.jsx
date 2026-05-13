@@ -18,7 +18,7 @@ export default function TokenTable({ tokens, errors, loading }) {
       <div className="token-wrap">
         <div className="empty-state">
           <div className="icon">🌙</div>
-          type some commands<br />and hit analyze
+          paste some python code<br />and hit analyze
         </div>
       </div>
     )

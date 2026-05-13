@@ -3,6 +3,13 @@ export default function Editor({ value, onChange, onAnalyze, onClear, loading })
     if (e.key === 'Enter' && e.ctrlKey) onAnalyze()
   }
 
+  const placeholder = `def greet(name):
+    print("Hello", name)
+
+x = 3.14
+if x > 0 and x != 5:
+    return True  # positive`
+
   return (
     <div className="editor-wrap">
       <div className="editor-label">// input source</div>
@@ -11,7 +18,7 @@ export default function Editor({ value, onChange, onAnalyze, onClear, loading })
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKey}
-        placeholder={'say "Hello World"\nadd 5 10\nmul 4 7\nweather "Naga"\nplay "Lofi Beats"'}
+        placeholder={placeholder}
         spellCheck={false}
       />
       <div className="editor-actions">
